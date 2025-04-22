@@ -28,18 +28,13 @@ export default function Home() {
 		setError(null);
 
 		try {
-			const response = await fetch(
-				'https://interview-with-ai-api.onrender.com/api/queries',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Access-Control-Allow-Origin': '*',
-					},
-					body: JSON.stringify({ prompt: sqlQuery }),
+			const response = await fetch('/api/proxy-query', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			);
-
+				body: JSON.stringify({ prompt: sqlQuery }), // sqlQuery senin değişkenin
+			});
 			const data = await response.json();
 
 			if (!response.ok) {
